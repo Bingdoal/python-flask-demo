@@ -1,0 +1,28 @@
+logger:
+  level: DEBUG
+  pattern:
+
+server:
+  name: flask-demo
+  port: 8085
+  version: 1.0.0
+
+security:
+  secret: DEMO_SECRET
+  enabled: false
+
+db:
+  mysql:
+    host: 127.0.0.1
+    port: 3306
+    user: root
+    pwd: "123456"
+    database: pydb
+  migration:
+    path: migration
+    base: 0000
+    target: "heads"
+    enabled: True
+
+caching:
+
