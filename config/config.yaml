@@ -19,7 +19,7 @@ db:
     pwd: "123456"
     database: pydb
   migration:
-    path: migration
+    path: migrations
     base: 0000
     target: "heads"
     enabled: True

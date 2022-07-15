@@ -8,3 +8,4 @@
 + [ ] authorization
 + [ ] marshmallow-SQLAlchemy
 + [ ] caching
++ [ ] exception handling
