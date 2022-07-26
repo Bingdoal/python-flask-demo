@@ -9,3 +9,4 @@
 + [ ] marshmallow-SQLAlchemy
 + [ ] caching
 + [ ] exception handling
++ [ ] logger

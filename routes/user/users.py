@@ -1,4 +1,5 @@
 from flask import jsonify
+from flask_jwt_extended import jwt_required, get_jwt_header
 from flask_restful import Resource
 from marshmallow import ValidationError
 
@@ -8,6 +9,8 @@ from utils import request_utils
 
 
 class Users(Resource):
+
+    @jwt_required()
     def get(self):
         users = UserModel()
         return jsonify(users.find_all())

@@ -22,7 +22,7 @@ db:
     path: migrations
     base: 0000
     target: "heads"
-    enabled: True
+    enabled: False
 
 caching:
 

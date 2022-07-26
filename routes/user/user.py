@@ -1,4 +1,3 @@
-from flask import request
 from flask_restful import Resource
 from marshmallow import ValidationError
 
@@ -20,7 +19,7 @@ class User(Resource):
                    }, 433
 
     def put(self, name):
-        pass
+        raise Exception(name)
 
     def delete(self, name):
         pass
