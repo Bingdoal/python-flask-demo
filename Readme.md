@@ -1,12 +1,12 @@
 # Python 後端 demo
 + [x] api - Flask
-  + [ ] Middleware
+  + [x] Middleware
 + [x] ORM - SQLAlchemy
 + [x] Migration - alembic
 + [x] validation - marshmallow
 + [x] config - PyYAML
-+ [ ] authorization
++ [x] authorization
 + [ ] marshmallow-SQLAlchemy
 + [ ] caching
-+ [ ] exception handling
-+ [ ] logger
++ [x] exception handling
++ [x] logger

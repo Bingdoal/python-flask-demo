@@ -1,19 +1,22 @@
+import logging
+
 from flask import request
 from flask.typing import ResponseClass
 
-from routes.server import server
+from routes.server import api_server
+
+logger = logging.getLogger(__name__)
 
 
-@server.app.before_request
+@api_server.app.before_request
 def before_request():
-    print("before request.", request.url)
+    logger.info(f"[Request]: {request.method} {request.path}")
 
 
-@server.app.after_request
+@api_server.app.after_request
 def after_request(response: ResponseClass):
     status_as_string = response.status
-    status_as_integer = response.status_code
-    print("after request.", status_as_string, status_as_integer, response.json)
+    logger.info(f"[Response]: {request.method} {request.path}: {status_as_string}")
     return response
 
 

@@ -1,15 +1,10 @@
 logger:
   level: DEBUG
-  pattern:
 
 server:
   name: flask-demo
   port: 8085
   version: 1.0.0
-
-security:
-  secret: DEMO_SECRET
-  enabled: false
 
 db:
   mysql:

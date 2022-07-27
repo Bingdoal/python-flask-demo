@@ -1,11 +1,22 @@
+import logging
+
 from flask import Flask, jsonify
 from flask_jwt_extended import JWTManager
 from flask_restful import Api
 from werkzeug.exceptions import HTTPException
 from werkzeug.http import HTTP_STATUS_CODES
+from waitress import serve
 
+from config import env
 from model import db, db_conn_str
 from utils.ma import ma
+
+level = logging.getLevelName(env.get_str("logger.level").upper())
+logging.basicConfig(level=level,
+                    format='%(asctime)s: %(name)s:%(lineno)d |%(levelname)s| %(message)s',
+                    datefmt='%Y-%m-%d %H:%M:%S')
+
+logger = logging.getLogger(__name__)
 
 
 class CustomApi(Api):
@@ -16,15 +27,17 @@ class CustomApi(Api):
                     err, 'description', HTTP_STATUS_CODES.get(err.code, '')
                 )
             }), err.code
-        print("handle_error: ", err)
-        return str(err), 500
+        logger.exception(err)
+        return {
+                   "message": str(err)
+               }, 500
 
 
-class Server:
+class __Server:
     app = Flask(__name__)
     __api = CustomApi(app, errors={
         'NoAuthorizationError': {
-            'message': "access_token is invalidate",
+            'message': "jwt token is invalidate",
             'status': 409,
         }
     })
@@ -41,7 +54,7 @@ class Server:
         self.jwt.init_app(self.app)
         db.init_app(self.app)
         ma.init_app(self.app)
-        self.app.run(port=port, debug=True)
+        serve(self.app, host="0.0.0.0", port=port)
 
 
-server = Server()
+api_server = __Server()
