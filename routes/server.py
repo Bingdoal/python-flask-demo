@@ -9,6 +9,7 @@ from waitress import serve
 
 from config import env
 from model import db, db_conn_str
+from routes.api_error import ApiError
 from utils.ma import ma
 
 level = logging.getLevelName(env.get_str("logger.level").upper())
@@ -27,6 +28,11 @@ class CustomApi(Api):
                     err, 'description', HTTP_STATUS_CODES.get(err.code, '')
                 )
             }), err.code
+        elif isinstance(err, ApiError):
+            return jsonify({
+                'message': err.message
+            }), err.code
+
         logger.exception(err)
         return {
                    "message": str(err)

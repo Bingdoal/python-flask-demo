@@ -19,5 +19,12 @@ db:
     target: "heads"
     enabled: False
 
+redis:
+  host: 127.0.0.1
+  port: 6379
+
+security:
+  timeout: 1440
+
 caching:
 
